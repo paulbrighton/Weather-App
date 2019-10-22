@@ -64,9 +64,20 @@ function init (resultFromServer) {
   weatherDescriptionHeader.innerHTML = resultDescription.charAt(0).toUpperCase() + resultDescription.slice(1)
 
   temperatureElement.innerHTML = Math.round(resultFromServer.main.temp) + '&#176'
-  windSpeedElement.innerHTML = 'Wind is ' + Math.floor(resultFromServer.wind.speed) + ' m/s'
+  windSpeedElement.innerHTML = 'Wind: ' + Math.floor(resultFromServer.wind.speed) + ' m/s'
   cityHeader.innerHTML = resultFromServer.name
-  humidityElement.innerHTML = 'Humidity level is ' + resultFromServer.main.humidity + '%'
+  humidityElement.innerHTML = 'Humidity: ' + resultFromServer.main.humidity + '%'
+  setPositionForWeatherInfo()
+}
+
+function setPositionForWeatherInfo () {
+  const weatherContainer = document.getElementById('weatherContainer')
+  const weatherContainerHeight = weatherContainer.clientHeight
+  const weatherContainerWidth = weatherContainer.clientWidth
+
+  weatherContainer.style.left = `calc(50% - ${weatherContainerWidth / 2}px)`
+  weatherContainer.style.top = `calc(50% - ${weatherContainerHeight / 1.3}px)`
+  weatherContainer.style.visibility = 'visible'
 }
 
 document.getElementById('searchBtn').addEventListener('click', () => {
